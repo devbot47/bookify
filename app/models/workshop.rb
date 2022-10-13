@@ -4,4 +4,6 @@ class Workshop < ApplicationRecord
   validates :total_seats, :registration_fee, presence: true,
             numericality: true
   validates :end_date, comparison: {greater_than: :start_date, message: 'cannot be before start date'}
+
+
 end
