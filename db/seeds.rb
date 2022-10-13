@@ -18,7 +18,7 @@ workshops = Workshop.create([
       start_time: "10:00 AM",
       end_time: "3:00 PM",
       total_seats: 100,
-      remaining_seats: 0,
+      remaining_seats: 100,
       registration_fee: 1500
     },
     {
@@ -30,7 +30,7 @@ workshops = Workshop.create([
       start_time: "10:00 AM",
       end_time: "3:00 PM",
       total_seats: 100,
-      remaining_seats: 0,
+      remaining_seats: 100,
       registration_fee: 1200
     },
   ])
