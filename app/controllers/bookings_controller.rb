@@ -12,12 +12,12 @@ class BookingsController < ApplicationController
     @booking           = Booking.new(booking_params.merge({amount_paid: @amount_to_be_paid, stripe_transaction_id: @charge.id}))
 
     if @charge && @booking.save!
+      BookingsMailer.booking_confirmation(@booking).deliver_now
       redirect_to workshop_path(@workshop), notice: 'Booking Success'
     end
 
     rescue Stripe::StripeError => error
       redirect_to workshop_path(@workshop), notice: "#{error.message}"
-
 
   end
 

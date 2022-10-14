@@ -1,0 +1,18 @@
+<div class="col-lg-10 mx-auto">
+  <div class="card shadow">
+    <div class="card-header">
+      <h4 class="card-title">Booking Confirmation!</h4>
+    </div>
+    <div class="card-body">
+      <h1>Greetings from Bookify</h1>
+      <h3>hello <%= @user.full_name %></h3>
+      <p class="lead">Your booking for <strong><%= @workshop.name %> has been confirmed. Please find the booking details below</strong></p>
+      <h3>Booking Details</h3>
+      <p><strong>No of Tickets: <%= @booking.total_tickets %></strong></p>
+      <p><strong>Amount Paid: <%= @booking.amount_paid %></strong></p>
+      <hr>
+      <h4><span class="badge bg-primary"><%= "From #{@workshop.start_date} to #{@workshop.end_date}" %></span></h4>
+      <h4><span class="badge bg-primary"><%=  "At #{@workshop.start_time} to #{@workshop.end_time} (#{((@workshop.start_time.to_time - @workshop.end_time.to_time)/1.hours).abs}) hours" %></span></h4>
+    </div>
+  </div>
+</div>
