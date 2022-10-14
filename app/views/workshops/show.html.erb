@@ -21,60 +21,64 @@
 <div class="col-lg-4 mt-4">
   <div class="card shadow mb-3">
     <div class="card-body">
-      <h4 class="card-title mb-2">Book your seat now!</h4>
-      <%= form_with url: bookings_path, data:{turbo: false} do |f| %>
+      <% unless @workshop.is_upcoming_workshop? %>
+        <h4 class="card-title mb-2">Book your seat now!</h4>
+        <%= form_with url: bookings_path, data:{turbo: false} do |f| %>
 
-        <%= f.hidden_field :workshop_id, value: @workshop.id %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <div class="form-group">
-          <%= f.label :full_name, class: "mb-2 mt-2" %>
-          <%= f.text_field :full_name, value: current_user.full_name, class: "form-control", disabled: true, required: true %>
-        </div>
-        <div class="form-group">
-          <%= f.label :email, class: "mb-2 mt-2" %>
-          <%= f.text_field :email, value: current_user.email, class: "form-control",  disabled: true, required: true %>
-        </div>
-        <div class="form-group">
-          <%= f.label :contact_number, class: "mb-2 mt-2" %>
-          <%= f.text_field :contact_number, value: current_user.full_name, class: "form-control",  disabled: true, required: true %>
-        </div>
-        <div class="form-group">
-          <%= f.label :total_tickets, class: "mb-2 mt-2" %>
-          <%= f.number_field :total_tickets, class: "form-control", min: 1, max: @workshop.remaining_seats, required: true %>
-        </div>
+          <%= f.hidden_field :workshop_id, value: @workshop.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <div class="form-group">
+            <%= f.label :full_name, class: "mb-2 mt-2" %>
+            <%= f.text_field :full_name, value: current_user.full_name, class: "form-control", disabled: true, required: true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email, class: "mb-2 mt-2" %>
+            <%= f.text_field :email, value: current_user.email, class: "form-control",  disabled: true, required: true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :contact_number, class: "mb-2 mt-2" %>
+            <%= f.text_field :contact_number, value: current_user.full_name, class: "form-control",  disabled: true, required: true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :total_tickets, class: "mb-2 mt-2" %>
+            <%= f.number_field :total_tickets, class: "form-control", min: 1, max: @workshop.remaining_seats, required: true %>
+          </div>
 
-        <h4 class="mt-4 mb-4">Card Details </h4>
-        <hr>
+          <h4 class="mt-4 mb-4">Card Details </h4>
+          <hr>
 
-        <div class="form-group">
-          <%= f.label :card_number, class: "mb-2 mt-2" %>
-          <%= f.text_field :card_number, class: "form-control", required: true %>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="form-group">
-              <%= f.label :cvc, class: "mb-2 mt-2" %>
-              <%= f.text_field :cvc, class: "form-control", maxlength: 4, required: true %>
+          <div class="form-group">
+            <%= f.label :card_number, class: "mb-2 mt-2" %>
+            <%= f.text_field :card_number, class: "form-control", required: true %>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.label :cvc, class: "mb-2 mt-2" %>
+                <%= f.text_field :cvc, class: "form-control", maxlength: 4, required: true %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.label :month, class: "mb-2 mt-2" %>
+                <%= f.number_field :exp_month, class: "form-control", min: 1, max: 12, required: true %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.label :year, class: "mb-2 mt-2" %>
+                <%= f.number_field :exp_year, class: "form-control", min: 2022, max: 2026, required: true %>
+              </div>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <%= f.label :month, class: "mb-2 mt-2" %>
-              <%= f.number_field :exp_month, class: "form-control", min: 1, max: 12, required: true %>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <%= f.label :year, class: "mb-2 mt-2" %>
-              <%= f.number_field :exp_year, class: "form-control", min: 2022, max: 2026, required: true %>
-            </div>
-          </div>
-        </div>
 
-        <div class="d-grid gap-2">
-          <%= f.submit "Book Now", class:"btn btn-outline-danger btn-lg mt-3"%>
-        </div>
-      <%end %>
+          <div class="d-grid gap-2">
+            <%= f.submit "Book Now", class:"btn btn-outline-danger btn-lg mt-3"%>
+          </div>
+        <%end %>
+      <% else %>
+        <h4 class="card-title mb-2">Workshop has already been taken!</h4>
+    <% end %>
     </div>
   </div>
 </div>
