@@ -13,11 +13,11 @@ class BookingsController < ApplicationController
 
     if @charge && @booking.save!
       BookingsMailer.booking_confirmation(@booking).deliver_now
-      redirect_to workshop_path(@workshop), notice: 'Booking Success'
+      redirect_to workshop_path(@workshop), notice: "You have successfully booked #{@booking.total_tickets} tickets for #{@workshop.name} workshop."
     end
 
     rescue Stripe::StripeError => error
-      redirect_to workshop_path(@workshop), notice: "#{error.message}"
+      redirect_to workshop_path(@workshop), alert: "#{error.message}"
 
   end
 
