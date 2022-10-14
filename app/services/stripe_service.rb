@@ -23,8 +23,8 @@ class StripeService
     card = Stripe::Token.create({
                    card: {
                      number: params[:card_number].to_s,
-                     exp_month: params[:month],
-                     exp_year: params[:year],
+                     exp_month: params[:exp_month],
+                     exp_year: params[:exp_year],
                      cvc: params[:cvc],
                    },
                  })
