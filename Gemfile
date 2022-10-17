@@ -75,4 +75,4 @@ end
 gem 'cssbundling-rails'
 gem 'devise'
 gem 'stripe'
-
+gem 'friendly_id'
