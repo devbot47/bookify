@@ -25,8 +25,8 @@
         <h4 class="card-title mb-2">Book your seat now!</h4>
         <%= form_with url: bookings_path, data:{turbo: false} do |f| %>
 
-          <%= f.hidden_field :workshop_id, value: @workshop.id %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :workshop_id, value: @workshop.slug %>
+          <%= f.hidden_field :user_id, value: current_user.slug %>
           <div class="form-group">
             <%= f.label :full_name, class: "mb-2 mt-2" %>
             <%= f.text_field :full_name, value: current_user.full_name, class: "form-control", disabled: true, required: true %>

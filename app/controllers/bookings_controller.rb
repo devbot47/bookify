@@ -5,9 +5,12 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params.merge(
       {
+        user_id: @user.id,
+        workshop_id: @workshop.id,
         amount_paid: @amount_to_be_paid,
         stripe_transaction_id: @charge.id
       }))
+    debugger
     if @booking.save!
       BookingsMailer.booking_confirmation(@booking).deliver_now
       redirect_to workshop_path(@workshop), notice: "You have successfully booked #{@booking.total_tickets} tickets for #{@workshop.name} workshop."
@@ -26,8 +29,8 @@ class BookingsController < ApplicationController
 
   def set_attributes
     @stripe_service    = StripeService.new
-    @workshop          = Workshop.find(params[:workshop_id])
-    @user              = current_user
+    @workshop          = Workshop.friendly.find(params[:workshop_id])
+    @user              = User.friendly.find(params[:user_id])
   end
 
   def charge_for_booking
